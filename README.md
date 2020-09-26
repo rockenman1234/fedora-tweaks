@@ -16,4 +16,6 @@ git clone https://github.com/rockenman1234/fedora32-tweaks.git
 
 cd /home/*INSERT YOUR USERNAME*/fedora32-tweaks
 
-sudo ./fedora32-tweaks.sh
+chmod 775 Fedora-tweaks.sh
+
+sudo ./Fedora32-tweaks.sh
