@@ -1,4 +1,4 @@
-#WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS!!! Run at your own risk! 
+# WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS!!! Run at your own risk! 
 
 This script enables special tweaks to make fedora more usable. 
 
