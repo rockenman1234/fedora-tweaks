@@ -1,6 +1,4 @@
-# fedora32-tweaks
-
-WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS!!! Run at your own risk! 
+#WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS!!! Run at your own risk! 
 
 This script enables special tweaks to make fedora more usable. 
 
@@ -9,7 +7,7 @@ Tweaks included are: DNF speed up, installs RPM Fusion  (free and non-free), ins
 
 
 
-Installation Procedure:
+# Installation Procedure:
 (Note: must be run in bash or other SH compatible shell! If you dont know what that means your probably already in bash.)
 
 git clone https://github.com/rockenman1234/fedora32-tweaks.git
