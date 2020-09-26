@@ -112,4 +112,4 @@ echo '
 
 '
 	
-echo 'It is imperative to reboot as soon as posible!!!'
+echo 'It is imperative to reboot as soon as possible!!!'
