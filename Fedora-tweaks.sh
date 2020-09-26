@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! This script enables special tweaks to make fedora more usable. These tweaks include: DNF speed up, delta mirrors, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. Made by Alex jenkins, follow me on github at https://github.com/rockenman1234 
+# WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! This script enables special tweaks to make fedora more usable. These tweaks include: DNF speed up, delta mirrors, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts, wine-devel, fish shell, audacity, and chromium. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. Made by Alex jenkins, follow me on github at https://github.com/rockenman1234 
 
 echo '
 
@@ -87,6 +87,20 @@ sudo dnf install snapd -y
 sudo dnf copr enable dawid/better_fonts -y
 
 sudo dnf install fontconfig-enhanced-defaults fontconfig-font-replacements -y
+
+# This line install wine
+sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/32/winehq.repo -y
+
+sudo dnf install winehq-devel -y
+
+# This line install fish shell
+sudo dnf install fish -y
+
+# This line installs audacity
+sudo dnf install audacity -y
+
+# This line installs chromium
+sudo dnf install chromium -y
 
 # Ending messages and heads-up
 
