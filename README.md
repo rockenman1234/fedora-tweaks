@@ -13,8 +13,8 @@ This is a script that I made to help fedora run better with as little user tweak
 
 git clone https://github.com/rockenman1234/fedora32-tweaks.git
 
-cd /home/*INSERT YOUR USERNAME*/fedora32-tweaks
+cd /home/*INSERT YOUR USERNAME*/fedora-tweaks
 
 chmod 775 Fedora-tweaks.sh
 
-sudo ./Fedora32-tweaks.sh
+sudo ./Fedora-tweaks.sh
