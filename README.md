@@ -1,6 +1,6 @@
-# WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS!!! Run at your own risk! 
+# WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS!!!
 
-This script enables special tweaks to make fedora more usable. 
+This script enables special tweaks to make fedora more usable, run at your own risk! 
 
 Tweaks included are: DNF speed up, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. More to come in the future!
 
