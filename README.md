@@ -9,8 +9,8 @@ Tweaks included are: DNF speed up, installs RPM Fusion  (free and non-free), ins
 
 
 
-Installation Procedure: 
-(Note: must be run in bash or other SH compatible shell! If you dont know what that means your probably in bash already.)
+"*Installation Procedure*: 
+(Note: must be run in bash or other SH compatible shell! If you dont know what that means your probably already in bash.)"
 
 git clone https://github.com/rockenman1234/fedora32-tweaks.git
 
