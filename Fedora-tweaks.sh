@@ -149,6 +149,9 @@ sudo dnf copr enable dawid/better_fonts -y
 
 sudo dnf install fontconfig-enhanced-defaults fontconfig-font-replacements -y
 
+# This line installs OCS-URL
+rpm -i https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1MzA3NzQ2ODAiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6IjZmNmQ4Y2E0MzNmZTY5OTY3ZmQ4NzZhMDUzZDlmNmM1NjAzOGNkODFkMjk2NzYzODNjMDdhNmVkNTJiN2U4NDAyMTgxNjRiYzJhNTkyY2E4M2Q0M2EyYzQyMGQwZmYyY2FhYWVkY2UxNjljODI0NzhjZWY1ZmViODg2NzVkYzFjIiwidCI6MTYwMTI2MDkxOCwic3RmcCI6IjEyMDM0NDQzYzE3YzI3NzljNzUxZWM2YzQ2NTA0NTQ4Iiwic3RpcCI6IjI2MDA6NmM1YTo2MzgwOjE5MzpmOTUwOjkyMzY6ZTA6NzM3NSJ9.K_cK1APNRJ39lpuoT3Cd1SRjeoNsOPjNyC75Uphy7Ak/ocs-url-3.1.0-1.x86_64.rpm
+
 # This line install wine
 sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/32/winehq.repo -y
 
