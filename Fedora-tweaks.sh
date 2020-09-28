@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! This script enables special tweaks to make fedora more usable. These tweaks include: DNF speed up, delta mirrors, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts, wine-devel, fish shell, audacity, and chromium. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. Made by Alex jenkins, follow me on github at https://github.com/rockenman1234 
+KERNEL_VERSION=$(uname -r)
+
+# WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! This script enables special tweaks to make fedora more usable. These tweaks include: DNF speed up, delta mirrors, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts, wine-devel, fish shell, audacity, and chromium, better touchpad and ssd support. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. Made by Alex jenkins, follow me on github at https://github.com/rockenman1234 
 
 echo '
 
@@ -59,6 +61,53 @@ sudo dnf install gnome-tweak-tool -y
 sudo dnf copr enable kwizart/fedy -y
 
 sudo dnf install fedy -y
+
+# This line updates the rescue image
+/etc/kernel/postinst.d/51-dracut-rescue-postinst.sh ${KERNEL_VERSION} /boot/vmlinuz-${KERNEL_VERSION}
+
+# These lines enable tap-to-click on GDM 
+sudo su - gdm -s /bin/bash << EOF
+export $(dbus-launch)
+
+# These lines enable better touchpad support
+gsettings set org.gnome.desktop.peripherals.touchpad click-method 'fingers'
+gsettings set org.gnome.desktop.peripherals.touchpad disable-while-typing true
+gsettings set org.gnome.desktop.peripherals.touchpad edge-scrolling-enabled false
+gsettings set org.gnome.desktop.peripherals.touchpad left-handed 'mouse'
+gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
+gsettings set org.gnome.desktop.peripherals.touchpad send-events 'enabled'
+gsettings set org.gnome.desktop.peripherals.touchpad speed 0.5
+gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag true
+gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
+gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
+
+# Workaround for touchpad phantom tap-clicks
+cat << EOF >/etc/udev/rules.d/90-psmouse.rules
+ACTION=="add|change", SUBSYSTEM=="module", DEVPATH=="/module/psmouse", ATTR{parameters/synaptics_intertouch}="0"
+EOF
+restorecon -F /etc/udev/rules.d/90-psmouse.rules
+
+# Configure trackpoint for scrolling when combined with physical middle button
+cat << EOF >/etc/X11/xorg.conf.d/90-trackpoint.conf
+Section "InputClass"
+    Identifier "Trackpoint Scrolling"
+    MatchProduct "TPPS/2 IBM TrackPoint"
+    MatchDevicePath "/dev/input/event*"
+    # Configure wheel emulation, using middle button and "natural scrolling".
+    Option "EmulateWheel" "on"
+    Option "EmulateWheelButton" "2"
+    Option "EmulateWheelTimeout" "200"
+    Option "EmulateWheelInertia" "7"
+    Option "XAxisMapping" "7 6"
+    Option "YAxisMapping" "5 4"
+    # Set up an acceleration config ("mostly linear" profile, factor 5.5).
+    Option "AccelerationProfile" "3"
+    Option "AccelerationNumerator" "55"
+    Option "AccelerationDenominator" "10"
+    Option "ConstantDeceleration" "3"
+EndSection
+EOF
+restorecon -F /etc/X11/xorg.conf.d/90-trackpoint.conf
 
 # This line installs and enables TLP
 sudo dnf install tlp tlp-rdw -y
@@ -121,6 +170,12 @@ sudo dnf upgrade --refresh -y
 
 sudo dnf install dnf-plugin-system-upgrade -y
 
+# Enable SSD trimmer
+sudo systemctl enable --now fstrim.timer
+
+# This line removes unnecessary packages
+sudo dnf remove -y abrt*
+
 # Ending messages and heads-up
 
 echo '
@@ -146,3 +201,5 @@ echo '
 '
 	
 echo 'It is imperative to reboot as soon as possible!!!'
+
+# End of file
