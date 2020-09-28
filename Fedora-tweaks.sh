@@ -50,6 +50,8 @@ sudo rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-re
 
 sudo dnf update -y
 
+sudo dnf groupupdate core
+
 # This line installs gnome-tweaks
 sudo dnf install gnome-tweak-tool -y
 
@@ -70,7 +72,17 @@ sudo dnf install steam -y
 sudo dnf install vlc -y
 
 # This line installs various multimedia codecs, some of might already be installed
-sudo dnf install gstreamer1-plugins-base gstreamer1-plugins-good gstreamer1-plugins-bad-free gstreamer1-plugins-bad-free-extras gstreamer1-plugins-good-extras libdvdread libdvdnav lsdvd -y
+sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
+
+sudo dnf groupupdate sound-and-video -y
+
+sudo dnf install rpmfusion-free-release-tainted -y
+
+sudo dnf install libdvdcss -y
+
+sudo dnf install rpmfusion-nonfree-release-tainted -y
+
+sudo dnf install \*-firmware -y
 
 # This line installs support for compression algorithims 
 sudo dnf install p7zip p7zip-plugins -y
@@ -102,6 +114,13 @@ sudo dnf install audacity -y
 # This line installs chromium
 sudo dnf install chromium -y
 
+# These lines install dnf upgrade
+sudo dnf update -y
+
+sudo dnf upgrade --refresh -y
+
+sudo dnf install dnf-plugin-system-upgrade -y
+
 # Ending messages and heads-up
 
 echo '
@@ -110,7 +129,7 @@ echo '
 
 '
 
-echo 'The tweaks are done! Thanks for using my project! NOTICE: Please read if you have and NVIDIA card: https://rpmfusion.org/Howto/NVIDIA, this script cannot install nvidia drivers for you! Please either use this article (recomended), or use fedy to install the drivers you need!'
+echo 'The tweaks are done! Thanks for using my project! NOTICE: Please read if you have and NVIDIA card: https://rpmfusion.org/Howto/NVIDIA, this script cannot install nvidia drivers for you! Please either use this article (recommended), or use fedy to install the drivers you need!'
 
 echo '
 
