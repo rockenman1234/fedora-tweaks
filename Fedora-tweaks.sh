@@ -2,7 +2,7 @@
 
 KERNEL_VERSION=$(uname -r)
 
-# WARNING: MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! This script enables special tweaks to make fedora more usable. These tweaks include: DNF speed up, delta mirrors, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts, wine-devel, fish shell, audacity, and chromium, better touchpad and ssd support. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. Made by Alex jenkins, follow me on github at https://github.com/rockenman1234 
+# WARNING: MUST ONLY BE USED ON FRESH FEDORA 33 INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! This script enables special tweaks to make fedora more usable. These tweaks include: DNF speed up, delta mirrors, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts, wine-devel, fish shell, audacity, and chromium, better touchpad and ssd support. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. Made by Alex jenkins, follow me on github at https://github.com/rockenman1234 
 
 echo '
 
@@ -10,7 +10,7 @@ echo '
 
 '
 
-echo 'WARNING: READ THE FOLLOWING VERY CAREFULLY! MUST ONLY BE USED ON FRESH FEDORA 32 INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! The process could take aslong as half an hour depending on your internet connection, but should only take 3-5 minutes with good internet connection. I cannot be held responsible for a bricked install, you have been warned!'
+echo 'WARNING: READ THE FOLLOWING VERY CAREFULLY! MUST ONLY BE USED ON FRESH FEDORA 33 INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! The process could take aslong as half an hour depending on your internet connection, but should only take 3-5 minutes with good internet connection. I cannot be held responsible for a bricked install, you have been warned!'
 
 echo '
 
@@ -18,7 +18,7 @@ echo '
 
 '
 
-echo 'This is not a fully autonomous script, when installing RPM-Fusion repos, this script cannot accept the keys for you, you MUST TYPE "y" When asked or the script will fail!!! Please close and save all work before running this script!'
+echo 'This is not a fully autonomous script, when installing RPM-Fusion repos, this script cannot accept the keys for you, you MUST type "y" When asked or the script will fail!!! Please close and save all work before running this script!'
 
 echo '
 
@@ -26,7 +26,7 @@ echo '
 
 '
 
-echo "Accepting the terms, do you still wish to run? Type 1 or 2."
+echo "Accepting the terms above, do you still wish to run? Type 1 or 2."
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) break;;
@@ -46,9 +46,9 @@ echo 'deltarpm=true' >> /etc/dnf/dnf.conf
 sudo dnf update -y
 
 # These next lines add RPM Fusion Free and Non-free repos
-sudo rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo rpm -Uvh https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
   
-sudo rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo rpm -Uvh https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 
 sudo dnf update -y
 
@@ -120,7 +120,7 @@ sudo dnf install steam -y
 # This line installs vlc
 sudo dnf install vlc -y
 
-# This line installs various multimedia codecs, some of might already be installed
+# These lines installs various multimedia codecs, some of which might already be installed
 sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
 
 sudo dnf groupupdate sound-and-video -y
@@ -141,10 +141,10 @@ sudo dnf install cabextract -y
 
 rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
-# This lines installs snap
+# This line installs snap
 sudo dnf install snapd -y
 
-# These line installs and enables better_fonts
+# These lines installs and enables better_fonts
 sudo dnf copr enable dawid/better_fonts -y
 
 sudo dnf install fontconfig-enhanced-defaults fontconfig-font-replacements -y
@@ -152,7 +152,7 @@ sudo dnf install fontconfig-enhanced-defaults fontconfig-font-replacements -y
 # This line installs OCS-URL
 rpm -i https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1MzA3NzQ2ODAiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6IjZmNmQ4Y2E0MzNmZTY5OTY3ZmQ4NzZhMDUzZDlmNmM1NjAzOGNkODFkMjk2NzYzODNjMDdhNmVkNTJiN2U4NDAyMTgxNjRiYzJhNTkyY2E4M2Q0M2EyYzQyMGQwZmYyY2FhYWVkY2UxNjljODI0NzhjZWY1ZmViODg2NzVkYzFjIiwidCI6MTYwMTI2MDkxOCwic3RmcCI6IjEyMDM0NDQzYzE3YzI3NzljNzUxZWM2YzQ2NTA0NTQ4Iiwic3RpcCI6IjI2MDA6NmM1YTo2MzgwOjE5MzpmOTUwOjkyMzY6ZTA6NzM3NSJ9.K_cK1APNRJ39lpuoT3Cd1SRjeoNsOPjNyC75Uphy7Ak/ocs-url-3.1.0-1.x86_64.rpm
 
-# This line install wine
+# These lines install wine
 sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/32/winehq.repo -y
 
 sudo dnf install winehq-devel -y
