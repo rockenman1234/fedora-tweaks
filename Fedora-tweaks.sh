@@ -2,7 +2,7 @@
 
 KERNEL_VERSION=$(uname -r)
 
-# WARNING: MUST ONLY BE USED ON FRESH FEDORA 33 INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! This script enables special tweaks to make fedora more usable. These tweaks include: DNF speed up, delta mirrors, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts, wine-devel, fish shell, audacity, and chromium, better touchpad and ssd support. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. Made by Alex jenkins, follow me on github at https://github.com/rockenman1234 
+# WARNING: MUST ONLY BE USED ON FRESH FEDORA INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! This script enables special tweaks to make fedora more usable. These tweaks include: DNF speed up, delta mirrors, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts, wine-devel, fish shell, audacity, and chromium, better touchpad and ssd support. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. Made by Alex jenkins, follow me on github at https://github.com/rockenman1234 
 
 echo '
 
@@ -10,7 +10,7 @@ echo '
 
 '
 
-echo 'WARNING: READ THE FOLLOWING VERY CAREFULLY! MUST ONLY BE USED ON FRESH FEDORA 33 INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! The process could take aslong as half an hour depending on your internet connection, but should only take 3-5 minutes with good internet connection. I cannot be held responsible for a bricked install, you have been warned!'
+echo 'WARNING: READ THE FOLLOWING VERY CAREFULLY! MUST ONLY BE USED ON FRESH FEDORA INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! The process could take aslong as half an hour depending on your internet connection, but should only take 3-5 minutes with good internet connection. I cannot be held responsible for a bricked install, you have been warned!'
 
 echo '
 
