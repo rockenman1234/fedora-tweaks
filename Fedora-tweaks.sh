@@ -46,9 +46,9 @@ echo 'deltarpm=true' >> /etc/dnf/dnf.conf
 sudo dnf update -y
 
 # These next lines add RPM Fusion Free and Non-free repos
-sudo rpm -Uvh https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
   
-sudo rpm -Uvh https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
 
 sudo dnf update -y
 
@@ -170,6 +170,8 @@ sudo dnf install chromium -y
 sudo dnf update -y
 
 sudo dnf upgrade --refresh -y
+
+sudo dnf check-update -y
 
 sudo dnf install dnf-plugin-system-upgrade -y
 
