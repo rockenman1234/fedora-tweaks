@@ -9,7 +9,11 @@ echo '
 
 
 '
-
+echo '
+/ _| ___  __| | ___  _ __ __ _  | |___      _____  __ _| | _____ 
+| |_ / _ \/ _` |/ _ \| '__/ _` | | __\ \ /\ / / _ \/ _` | |/ / __|
+|  _|  __/ (_| | (_) | | | (_| | | |_ \ V  V /  __/ (_| |   <\__ \
+|_|  \___|\__,_|\___/|_|  \__,_|  \__| \_/\_/ \___|\__,_|_|\_\___/'
 echo 'WARNING: READ THE FOLLOWING VERY CAREFULLY! MUST ONLY BE USED ON FRESH FEDORA INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! The process could take aslong as half an hour depending on your internet connection, but should only take 3-5 minutes with good internet connection. I cannot be held responsible for a bricked install, you have been warned!'
 
 echo '
