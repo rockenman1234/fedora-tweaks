@@ -10,6 +10,8 @@ This is a script that I made to help fedora run better with as little user tweak
 
 # Installation Procedure:
 (Note: must be run in bash or other SH compatible shell! If you dont know what that means, your probably already in bash.)
+```
+bash
 
 git clone https://github.com/rockenman1234/fedora-tweaks.git
 
@@ -18,3 +20,4 @@ cd ~/fedora-tweaks/
 chmod 775 Fedora-tweaks.sh
 
 sudo ./Fedora-tweaks.sh
+```
