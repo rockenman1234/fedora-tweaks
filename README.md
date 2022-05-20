@@ -19,7 +19,7 @@ git clone https://github.com/rockenman1234/fedora-tweaks.git
 
 cd ~/fedora-tweaks/
 
-chmod 775 Fedora-tweaks.sh
+chmod 775 Fedora-tweaks-VERSION.sh
 
 sudo ./Fedora-tweaks-VERSION.sh
 ```
