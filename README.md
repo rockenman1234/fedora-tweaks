@@ -2,6 +2,8 @@
 
 This script enables special tweaks to make fedora more usable, run at your own risk! 
 
+This script includes two versions, desktop and laptop. Pick accordingly, laptop includes additional tweaking to the gnome subsystem that allows for more efficient use of the trackpad. Desktop simply removes them, making for a slightly faster set up process.
+
 Tweaks included are: DNF speed up, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. More to come in the future!
 
 About this script:
@@ -19,5 +21,5 @@ cd ~/fedora-tweaks/
 
 chmod 775 Fedora-tweaks.sh
 
-sudo ./Fedora-tweaks.sh
+sudo ./Fedora-tweaks-VERSION.sh
 ```
