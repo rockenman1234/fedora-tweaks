@@ -1,10 +1,9 @@
-# WARNING: MUST ONLY BE USED ON FRESH FEDORA INSTALL WITH INTERNET ACCESS!!!
-
-This script enables special tweaks to make fedora more usable, run at your own risk!
+# FEDORA TWEAKS 
+This script enables special tweaks to make fedora more usable, **_run at your own risk!_**
 
 I made this script because I found hundreds of articles about what to do after installing Fedora, but none of them got me to 100% - so I made this script to solve that!
 
-This script includes two versions, desktop and laptop. Pick accordingly, laptop includes additional tweaking to the gnome subsystem that allows for more efficient use of the trackpad. Desktop does not include them, making for a slightly faster set up process.
+This script includes two versions, desktop and laptop. Pick accordingly, laptop includes additional tweaking to the gnome-subsystem that allows for more efficient use of the trackpad. Desktop does not include these tweaks, making for a slightly faster set up process.
 
 # Desktop Version:
 
