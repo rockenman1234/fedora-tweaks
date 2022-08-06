@@ -14,7 +14,7 @@ This script includes two versions, desktop and laptop. Pick accordingly, laptop 
 | Gnome-tweaks | Default desktop tweaking tool |
 | Fedy | All in one configuration tool for Fedora | 
 | Steam | Installs latest version from repositories | 
-| VLC | An opensource all-in-one mutlimedia tool |
+| VLC | An open source all-in-one mutlimedia tool |
 | Propriety multimedia codecs | Includes support for libdvdcss, and all compatible free and proprietry firmware drivers from DNF | 
 | Better Compression support | Installs p7zip and all related program plugins | 
 | Better_fonts| Installs MSCore fonts and Cabextract |
