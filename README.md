@@ -39,7 +39,7 @@ This script includes two versions, desktop and laptop. Pick accordingly, laptop 
 
 
 # Installation Procedure:
-(Note: must be run in bash or other SH compatible shell! If you dont know what that means, your probably already in bash.)
+***Must be run in bash or other SH compatible shell! If you dont know what that means, your probably already in bash.***
 
 ### Desktop Version
 
