@@ -5,7 +5,7 @@ I made this script because I found hundreds of articles about what to do after i
 
 This script includes two versions, desktop and laptop. Pick accordingly, laptop includes additional tweaking to the gnome-subsystem that allows for more efficient use of the trackpad. Desktop does not include these tweaks, making for a slightly faster set up process.
 
-# Desktop Version:
+## Desktop Version:
 
 |Tweaks included | Description |
 | ------------- | ------------- |
