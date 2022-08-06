@@ -26,7 +26,7 @@ This script includes two versions, desktop and laptop. Pick accordingly, laptop 
 | SSD Trimmer | Enables Systemd call for fstrim.timer |
 
 
-## Unique to Laptop version: 
+## Unique to Laptop Version: 
 
 |Tweaks included | Description |
 | ------------- | ------------- |
