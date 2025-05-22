@@ -1,6 +1,9 @@
 # FEDORA TWEAKS 
-This script enables special tweaks to make fedora more usable, **_run at your own risk!_**
+> [!NOTE]
+> This script enables special tweaks to make Fedora linux more usable out of the box, **_run at your own risk!_**
+> This script is fully autonomous, once run via CLI it will install programs and configure Fedora with the tweaks listed below.
 
+## About
 This script includes two versions, desktop and laptop. Pick accordingly, laptop includes additional tweaking to the gnome-subsystem that allows for more efficient use of the trackpad. Desktop does not include these tweaks, making for a slightly faster set up process.
 
 ## Desktop Version:
