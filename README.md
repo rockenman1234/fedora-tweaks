@@ -7,7 +7,7 @@ This script includes two versions, desktop and laptop. Pick accordingly, laptop 
 
 |Tweaks included | Description |
 | ------------- | ------------- |
-| DNF speed up | Sets fastest mirror to true, turns on delta RPM and sets parallel downloads to 10 |
+| DNF speed up | Sets fastest mirror to true, and sets parallel downloads to 10 |
 | RPM Fusion |  Installs both free and non-free channels |
 | Gnome-tweaks | Default desktop tweaking tool |
 | Fedy | All in one configuration tool for Fedora | 
