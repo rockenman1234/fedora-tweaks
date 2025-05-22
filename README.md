@@ -7,7 +7,7 @@ This script includes two versions, desktop and laptop. Pick accordingly, laptop 
 
 |Tweaks included | Description |
 | ------------- | ------------- |
-| DNF speed up | Sets fastest mirror to true, and DNF to parallel download up to 10 programs |
+| DNF speed up | Sets fastest mirror to true, and DNF to parallel download up to 10 programs simultaneously |
 | RPM Fusion |  Installs both free and non-free channels |
 | Gnome-tweaks | Default desktop tweaking tool |
 | Fedy | All in one configuration tool for Fedora | 
