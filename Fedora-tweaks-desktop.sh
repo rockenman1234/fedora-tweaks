@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Changelog (fedora compatibility was mostly maintained throughout 2022-2025, with occasional minor updates):
+# 2020-25-10: Inital release
+# 2022-19-5: Broke code into 2 scripts, one for laptop and one for desktop. 
+# 2025-22-5: Refactored code to remove redundant calls and improve readability. Removed deltaRPM support as it was removed in Fedora 42.
+
 KERNEL_VERSION=$(uname -r)
 
 # WARNING: MUST ONLY BE USED ON FRESH FEDORA INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! This script enables special tweaks to make fedora more usable. These tweaks include: DNF speed up, delta mirrors, installs RPM Fusion (free and non-free), installs gnome-tweaks, fedy, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts, wine-devel, fish shell, audacity, and chromium, better SSD support. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. Made by Alex jenkins, follow me on github at https://github.com/rockenman1234 
@@ -21,7 +26,7 @@ echo '
 
 '
 
-echo 'This is not a fully autonomous script, when installing RPM-Fusion repos, this script cannot accept the keys for you, you MUST type "y" When asked or the script will fail!!! Please close and save all work before running this script!'
+echo 'This is fully-autonomous script, please close and save all work before running this script!'
 
 echo '
 
@@ -41,99 +46,54 @@ echo 'This script enables special tweaks to make fedora more usable. These tweak
 
 # These following lines speed up dnf
 echo 'fastestmirror=true' >> /etc/dnf/dnf.conf
-
 echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf
 
-echo 'deltarpm=true' >> /etc/dnf/dnf.conf
-
+# Update system and install necessary packages
 sudo dnf update -y
+sudo dnf upgrade --refresh -y
+sudo dnf check-update -y
+sudo dnf install \
+    https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+    https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
+    gnome-tweak-tool \
+    fedy \
+    steam \
+    vlc \
+    rpmfusion-free-release-tainted \
+    libdvdcss \
+    rpmfusion-nonfree-release-tainted \
+    \*-firmware \
+    p7zip p7zip-plugins \
+    cabextract \
+    snapd \
+    fontconfig-enhanced-defaults fontconfig-font-replacements \
+    winehq-devel \
+    fish \
+    audacity \
+    chromium \
+    dnf-plugin-system-upgrade -y
 
-# These next lines add RPM Fusion Free and Non-free repos
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
-  
-sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
-
-sudo dnf update -y
-
+# Enable RPM Fusion repositories
 sudo dnf groupupdate core
-
-# This line installs gnome-tweaks
-sudo dnf install gnome-tweak-tool -y
-
-# These line installs fedy
-sudo dnf copr enable kwizart/fedy -y
-
-sudo dnf install fedy -y
-
-# This line updates the rescue image
-/etc/kernel/postinst.d/51-dracut-rescue-postinst.sh ${KERNEL_VERSION} /boot/vmlinuz-${KERNEL_VERSION}
-
-# This line installs steam
-sudo dnf install steam -y
-
-# This line installs vlc
-sudo dnf install vlc -y
-
-# These lines installs various multimedia codecs, some of which might already be installed
 sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
-
 sudo dnf groupupdate sound-and-video -y
 
-sudo dnf install rpmfusion-free-release-tainted -y
-
-sudo dnf install libdvdcss -y
-
-sudo dnf install rpmfusion-nonfree-release-tainted -y
-
-sudo dnf install \*-firmware -y
-
-# This line installs support for compression algorithims 
-sudo dnf install p7zip p7zip-plugins -y
-
-# This line installs MSCore fonts and cabextract
-sudo dnf install cabextract -y
-
+# Install MSCore fonts
 rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
-# This line installs snap
-sudo dnf install snapd -y
-
-# These lines installs and enables better_fonts
+# Enable better_fonts repository
 sudo dnf copr enable dawid/better_fonts -y
-
-sudo dnf install fontconfig-enhanced-defaults fontconfig-font-replacements -y
-
-# These lines install wine
-sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/32/winehq.repo -y
-
-sudo dnf install winehq-devel -y
-
-# This line install fish shell
-sudo dnf install fish -y
-
-# This line installs audacity
-sudo dnf install audacity -y
-
-# This line installs chromium
-sudo dnf install chromium -y
-
-# These lines install dnf upgrade
-sudo dnf update -y
-
-sudo dnf upgrade --refresh -y
-
-sudo dnf check-update -y
-
-sudo dnf install dnf-plugin-system-upgrade -y
 
 # Enable SSD trimmer
 sudo systemctl enable --now fstrim.timer
 
-# This line removes unnecessary packages
+# Update the rescue image
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+# Remove unnecessary packages
 sudo dnf remove -y abrt*
 
 # Ending messages and heads-up
-
 echo '
 
 
@@ -155,7 +115,7 @@ echo '
 
 
 '
-	
+    
 echo 'It is imperative to reboot as soon as possible!!!'
 
 # End of file

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# See Fedora-tweaks-desktop.sh for changelog!
+
 KERNEL_VERSION=$(uname -r)
 
 # WARNING: MUST ONLY BE USED ON FRESH FEDORA INSTALL WITH INTERNET ACCESS, AS ROOT!!! Run at your own risk! This script enables special tweaks to make fedora more usable. These tweaks include: DNF speed up, delta mirrors, installs RPM Fusion  (free and non-free), installs gnome-tweaks, fedy, TLP, steam, vlc, support for various multimedia codecs and compression support, snap, better_fonts, wine-devel, fish shell, audacity, and chromium, better touchpad and ssd support. It is broken up in the way it is for easy tweaking and fixing for future fedora versions. Made by Alex jenkins, follow me on github at https://github.com/rockenman1234 
@@ -21,7 +23,7 @@ echo '
 
 '
 
-echo 'This is not a fully autonomous script, when installing RPM-Fusion repos, this script cannot accept the keys for you, you MUST type "y" When asked or the script will fail!!! Please close and save all work before running this script!'
+echo 'This is fully-autonomous script, please close and save all work before running this script!'
 
 echo '
 
@@ -41,38 +43,29 @@ echo 'This script enables special tweaks to make fedora more usable. These tweak
 
 # These following lines speed up dnf
 echo 'fastestmirror=true' >> /etc/dnf/dnf.conf
-
 echo 'max_parallel_downloads=10' >> /etc/dnf/dnf.conf
-
 echo 'deltarpm=true' >> /etc/dnf/dnf.conf
 
+# Update system and install RPM Fusion Free and Non-free repos
 sudo dnf update -y
+sudo dnf install -y \
+    https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+    https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf groupupdate core -y
 
-# These next lines add RPM Fusion Free and Non-free repos
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
-  
-sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+# Install gnome-tweaks
+sudo dnf install -y gnome-tweak-tool
 
-sudo dnf update -y
-
-sudo dnf groupupdate core
-
-# This line installs gnome-tweaks
-sudo dnf install gnome-tweak-tool -y
-
-# These line installs fedy
+# Install fedy
 sudo dnf copr enable kwizart/fedy -y
+sudo dnf install -y fedy
 
-sudo dnf install fedy -y
+# Update the rescue image
+grub2-mkconfig -o /boot/grub2/grub.cfg
 
-# This line updates the rescue image
-/etc/kernel/postinst.d/51-dracut-rescue-postinst.sh ${KERNEL_VERSION} /boot/vmlinuz-${KERNEL_VERSION}
-
-# These lines enable tap-to-click on GDM 
+# Enable tap-to-click on GDM and better touchpad support
 sudo su - gdm -s /bin/bash << EOF
 export $(dbus-launch)
-
-# These lines enable better touchpad support
 gsettings set org.gnome.desktop.peripherals.touchpad click-method 'fingers'
 gsettings set org.gnome.desktop.peripherals.touchpad disable-while-typing true
 gsettings set org.gnome.desktop.peripherals.touchpad edge-scrolling-enabled false
@@ -83,6 +76,7 @@ gsettings set org.gnome.desktop.peripherals.touchpad speed 0.5
 gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag true
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
+EOF
 
 # Workaround for touchpad phantom tap-clicks
 cat << EOF >/etc/udev/rules.d/90-psmouse.rules
@@ -96,14 +90,12 @@ Section "InputClass"
     Identifier "Trackpoint Scrolling"
     MatchProduct "TPPS/2 IBM TrackPoint"
     MatchDevicePath "/dev/input/event*"
-    # Configure wheel emulation, using middle button and "natural scrolling".
     Option "EmulateWheel" "on"
     Option "EmulateWheelButton" "2"
     Option "EmulateWheelTimeout" "200"
     Option "EmulateWheelInertia" "7"
     Option "XAxisMapping" "7 6"
     Option "YAxisMapping" "5 4"
-    # Set up an acceleration config ("mostly linear" profile, factor 5.5).
     Option "AccelerationProfile" "3"
     Option "AccelerationNumerator" "55"
     Option "AccelerationDenominator" "10"
@@ -112,99 +104,60 @@ EndSection
 EOF
 restorecon -F /etc/X11/xorg.conf.d/90-trackpoint.conf
 
-# This line installs and enables TLP
-sudo dnf install tlp tlp-rdw -y
-
+# Install and enable TLP
+sudo dnf install -y tlp tlp-rdw
 sudo systemctl enable tlp
 
-# This line installs steam
-sudo dnf install steam -y
+# Install various applications and codecs
+sudo dnf install -y \
+    steam \
+    vlc \
+    p7zip p7zip-plugins \
+    cabextract \
+    snapd \
+    fontconfig-enhanced-defaults fontconfig-font-replacements \
+    winehq-devel \
+    fish \
+    audacity \
+    chromium \
+    rpmfusion-free-release-tainted \
+    rpmfusion-nonfree-release-tainted \
+    libdvdcss \
+    \*-firmware
 
-# This line installs vlc
-sudo dnf install vlc -y
-
-# These lines installs various multimedia codecs, some of which might already be installed
-sudo dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
-
-sudo dnf groupupdate sound-and-video -y
-
-sudo dnf install rpmfusion-free-release-tainted -y
-
-sudo dnf install libdvdcss -y
-
-sudo dnf install rpmfusion-nonfree-release-tainted -y
-
-sudo dnf install \*-firmware -y
-
-# This line installs support for compression algorithims 
-sudo dnf install p7zip p7zip-plugins -y
-
-# This line installs MSCore fonts and cabextract
-sudo dnf install cabextract -y
-
+# Install MSCore fonts
 rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
-
-# This line installs snap
-sudo dnf install snapd -y
-
-# These lines installs and enables better_fonts
-sudo dnf copr enable dawid/better_fonts -y
-
-sudo dnf install fontconfig-enhanced-defaults fontconfig-font-replacements -y
-
-# These lines install wine
-sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/32/winehq.repo -y
-
-sudo dnf install winehq-devel -y
-
-# This line install fish shell
-sudo dnf install fish -y
-
-# This line installs audacity
-sudo dnf install audacity -y
-
-# This line installs chromium
-sudo dnf install chromium -y
-
-# These lines install dnf upgrade
-sudo dnf update -y
-
-sudo dnf upgrade --refresh -y
-
-sudo dnf check-update -y
-
-sudo dnf install dnf-plugin-system-upgrade -y
 
 # Enable SSD trimmer
 sudo systemctl enable --now fstrim.timer
 
-# This line removes unnecessary packages
+# Remove unnecessary packages
 sudo dnf remove -y abrt*
 
+# Final system update and upgrade
+sudo dnf update -y
+sudo dnf upgrade --refresh -y
+sudo dnf check-update -y
+sudo dnf install -y dnf-plugin-system-upgrade
+
 # Ending messages and heads-up
-
 echo '
 
 
 
 '
-
 echo 'The tweaks are done! Thanks for using my project! NOTICE: Please read if you have and NVIDIA card: https://rpmfusion.org/Howto/NVIDIA, this script cannot install nvidia drivers for you! Please either use this article (recommended), or use fedy to install the drivers you need!'
-
 echo '
 
 
 
 '
-
 echo 'Follow me on github! https://github.com/rockenman1234'
-
 echo '
 
 
 
 '
-	
 echo 'It is imperative to reboot as soon as possible!!!'
 
 # End of file
