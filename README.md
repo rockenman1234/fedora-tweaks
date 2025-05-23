@@ -35,7 +35,7 @@ This script includes two versions, desktop and laptop. Pick accordingly, laptop 
 | TLP | Battery optomization software than runs in the background | 
 
 
-### And more to come in the future!
+**And more to come in the future!**
 
 
 # Installation Procedure:
