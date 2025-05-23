@@ -37,6 +37,7 @@ This script includes two versions, desktop and laptop. Pick accordingly, laptop 
 
 **And more to come in the future!**
 
+___
 
 # Installation Procedure:
 ***Must be run in Bash or other POSIX compatible shell! If you dont know what that means, you're probably already in Bash.***
